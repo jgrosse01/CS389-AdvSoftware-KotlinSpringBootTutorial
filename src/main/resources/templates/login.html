@@ -7,10 +7,10 @@
 <body>
 <div style="text-align: center;">
   <form th:action="@{/login}" th:object="${loginForm}" method="post">
-    <input type="text" th:field="*{username}" palceholder="Username"/>
-      <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</span>
+    <input type="text" th:field="*{username}" placeholder="Username"/>
+      <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</span><br/>
     <input type="password" th:field="*{password}" placeholder="Password"/>
-      <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span>
+      <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</span><br/>
     <button type="submit">Login</button>
   </form>
 </div>

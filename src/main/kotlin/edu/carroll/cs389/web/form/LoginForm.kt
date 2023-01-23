@@ -1,15 +1,18 @@
 package edu.carroll.cs389.web.form
 
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 
 class LoginForm {
-    @Size(min = 6, message = "Username must be at least 6 characters")
-    private lateinit var username: String;
+    @field:NotNull
+    @field:Size(min = 6, message = "Username must be at least 6 characters")
+    private var username: String? = null;
 
-    @Size(min = 8, message = "Password must be at least 8 characters")
-    private lateinit var password: String;
+    @field:NotNull
+    @field:Size(min = 8, message = "Password must be at least 8 characters")
+    private var password: String? = null;
 
-    fun getUsername(): String {
+    fun getUsername(): String? {
         return username;
     }
 
@@ -17,7 +20,7 @@ class LoginForm {
         this.username = username;
     }
 
-    fun getPassword(): String {
+    fun getPassword(): String? {
         return password;
     }
 

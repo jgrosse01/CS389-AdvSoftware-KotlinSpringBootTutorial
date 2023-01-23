@@ -1,6 +1,7 @@
 package edu.carroll.cs389.web.controller
 
 import edu.carroll.cs389.web.form.LoginForm;
+import jakarta.validation.Valid
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +20,8 @@ class LoginController {
     }
 
     @PostMapping("/login")
-    fun loginPost(@ModelAttribute loginForm: LoginForm, result: BindingResult): String {
-        print("User $loginForm.getUsername() attempted login");
+    fun loginPost(@Valid @ModelAttribute loginForm: LoginForm, result: BindingResult): String {
+        print("User ${loginForm.getUsername()} attempted login");
         if (result.hasErrors())
             return "login"
 

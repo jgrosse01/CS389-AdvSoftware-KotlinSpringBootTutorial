@@ -38,3 +38,6 @@ out/
 
 # H2 DATABASE FILE
 /demoDb*
+
+# log files
+logs/

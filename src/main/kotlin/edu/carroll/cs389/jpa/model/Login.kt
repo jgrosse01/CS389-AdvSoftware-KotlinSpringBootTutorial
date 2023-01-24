@@ -5,11 +5,16 @@ import java.util.*
 
 @Entity
 @Table(name="login")
-class Login {
+class Login() {
     companion object {
         val serialVersionID: Long = 1L
         val EOL: String = System.lineSeparator()
         val TAB: String = "\t"
+    }
+
+    constructor(username: String, rawPassword: String) : this() {
+        this.username = username
+        setRawPassword(rawPassword)
     }
 
     @Id
@@ -40,6 +45,10 @@ class Login {
 
     fun setHashedPassword(hashedPassword: String) {
         this.hashedPassword = hashedPassword
+    }
+
+    private fun setRawPassword(rawPassword: String) {
+        this.hashedPassword = rawPassword.hashCode().toString()
     }
 
     override fun toString(): String {

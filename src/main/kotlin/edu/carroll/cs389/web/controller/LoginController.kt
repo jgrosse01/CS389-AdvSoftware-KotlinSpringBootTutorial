@@ -1,5 +1,6 @@
 package edu.carroll.cs389.web.controller
 
+import edu.carroll.cs389.service.LoginService
 import edu.carroll.cs389.web.form.LoginForm;
 import jakarta.validation.Valid
 
@@ -13,7 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 
 @Controller
-class LoginController {
+class LoginController(private val loginService: LoginService) {
+
     @GetMapping("/login")
     fun loginGet(model: Model): String {
         model.addAttribute("loginForm", LoginForm());
@@ -22,6 +24,7 @@ class LoginController {
 
     @PostMapping("/login")
     fun loginPost(@Valid @ModelAttribute loginForm: LoginForm, result: BindingResult, attrs: RedirectAttributes): String {
+        // IMPLEMENT USER VALIDATION CALLS HERE FOR GLOBAL ERRORS
         print("User ${loginForm.getUsername()} attempted login");
         if (result.hasErrors())
             return "login";

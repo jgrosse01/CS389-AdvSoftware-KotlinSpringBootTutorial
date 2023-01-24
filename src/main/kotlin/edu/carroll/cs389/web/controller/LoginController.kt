@@ -7,6 +7,7 @@ import jakarta.validation.Valid
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult
+import org.springframework.validation.ObjectError
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,10 +25,14 @@ class LoginController(private val loginService: LoginService) {
 
     @PostMapping("/login")
     fun loginPost(@Valid @ModelAttribute loginForm: LoginForm, result: BindingResult, attrs: RedirectAttributes): String {
-        // IMPLEMENT USER VALIDATION CALLS HERE FOR GLOBAL ERRORS
         print("User ${loginForm.getUsername()} attempted login");
         if (result.hasErrors())
             return "login";
+
+        if (!loginService.validateUser(loginForm)) {
+            result.addError(ObjectError("globalError", "Username and password do not match any known users"))
+            return "login"
+        }
 
         attrs.addAttribute("username", loginForm.getUsername());
         return "redirect:/loginSuccess";

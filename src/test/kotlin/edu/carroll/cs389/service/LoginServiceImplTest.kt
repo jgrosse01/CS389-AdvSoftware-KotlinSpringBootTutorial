@@ -38,7 +38,7 @@ class LoginServiceImplTest {
     }
 
     @Test
-    fun validateUserSuccesssTest() {
+    fun validateUserSuccessTest() {
         val form: LoginForm = LoginForm(username, password)
         assertTrue("validateUserSuccessTest: should succeed using proper login info", loginService.validateUser(form))
     }
